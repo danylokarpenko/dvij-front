@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
-function App() {
+import LoginPage from './pages/login';
+import GamesPage from './pages/games';
+import GameInfo from './pages/game';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <title>FRIENDS GAMES</title>
+          <meta name="description" content="Game Incubator" />
+        </Helmet>
+      </HelmetProvider>
+
+      <>
+        <Router>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/games" element={<GamesPage />} />
+            <Route path="/games/:id" element={<GameInfo />} />
+            {/* other routes */}
+          </Routes>
+        </Router>
+      </>
+    </>
   );
-}
+};
 
 export default App;
