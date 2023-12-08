@@ -1,28 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
 import { Box, Stack, Typography } from '@mui/material';
 
 const defaultIconOptions = {
   style: { width: '25px', height: '25px', padding: 2, marginRight: 2 },
 };
 
-const sortByIsLead = (array) => {
-  return [...array].sort((a, b) => {
-    console.log(a, b);
-    if (a.isLead && !b.isLead) {
-      return -1; // a comes first
-    }
-    if (!a.isLead && b.isLead) {
-      return 1; // b comes first
-    }
-    return 0; // no change in order
-  });
-};
-
 export default function IterationItem({ iteration }) {
   const { id, description, likes, isApproved, creator } = iteration;
-  const navigate = useNavigate();
+
   return (
     <Stack
       direction="row"
@@ -52,7 +38,7 @@ export default function IterationItem({ iteration }) {
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <img
           {...defaultIconOptions}
-          src={`../../../../assets/icons/${
+          src={`../../../../assets/${
             likes > 0 ? 'red_heart' : 'grey_heart'
           }.png`}
           alt={'heart'}

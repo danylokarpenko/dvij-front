@@ -6,9 +6,12 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { ReactComponent as DvijSvg } from '../../assets/dvij.svg';
 
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useDispatch } from 'react-redux';
@@ -64,8 +67,10 @@ export default function LoginComponent() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+          <Avatar sx={{ m: 1, borderRadius: 0, bgcolor: 'secondary.main' }}>
+            {/* <LockOutlinedIcon /> */}
+
+            <DvijSvg />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in

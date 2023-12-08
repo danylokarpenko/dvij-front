@@ -7,14 +7,19 @@ import GamesPage from './pages/games';
 import GameInfo from './pages/game';
 
 const App = () => {
+  const currentUrlPath = window.location.pathname;
+  console.log(currentUrlPath);
+
   return (
     <>
-      <HelmetProvider>
-        <Helmet>
-          <title>FRIENDS GAMES</title>
-          <meta name="description" content="Game Incubator" />
-        </Helmet>
-      </HelmetProvider>
+      {currentUrlPath !== '/login' && (
+        <HelmetProvider>
+          <Helmet>
+            <title>FRIENDS GAMES</title>
+            <meta name="description" content="Game Incubator" />
+          </Helmet>
+        </HelmetProvider>
+      )}
 
       <>
         <Router>
