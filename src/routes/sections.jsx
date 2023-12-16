@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
-import LoginPage from '../pages/login';
-import GamesPage from '../pages/games';
+import LoginPage from '../pages/LoginPage';
+import GamesPage from '../pages/GameInfoPage';
 
 export default function Router() {
   return (

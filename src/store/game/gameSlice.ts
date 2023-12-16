@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CreateGameDto } from './dto/create-game.dto';
+import { GameI } from './interfaces/game.interface';
 
 interface GameState {
   current: any;
@@ -22,7 +22,7 @@ const gameSlice = createSlice({
     fetchGamesStart(state) {
       state.isLoading = true;
     },
-    fetchGamesSuccess(state, action: PayloadAction<CreateGameDto[]>) {
+    fetchGamesSuccess(state, action: PayloadAction<GameI[]>) {
       state.list = action.payload;
       state.isLoading = false;
       state.error = null;
@@ -31,7 +31,7 @@ const gameSlice = createSlice({
     fetchGameStart(state) {
       state.isLoading = true;
     },
-    fetchGameSuccess(state, action: PayloadAction<CreateGameDto>) {
+    fetchGameSuccess(state, action: PayloadAction<GameI>) {
       state.current = action.payload;
       state.isLoading = false;
       state.error = null;

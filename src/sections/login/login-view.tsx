@@ -6,19 +6,18 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import Box from '@mui/material/Box';
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { ReactComponent as DvijSvg } from '../../assets/dvij.svg';
-
-import Box from '@mui/material/Box';
-
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { useDispatch } from 'react-redux';
 import { login } from '../../store/auth/authActions';
 import { AppDispatch } from '../../store';
 import AppThemeProvider from '../../theme/AppThemeProvider';
-import { useNavigate } from 'react-router-dom';
 
 function Copyright(props: any) {
   return (
@@ -68,8 +67,6 @@ export default function LoginComponent() {
           }}
         >
           <Avatar sx={{ m: 1, borderRadius: 0, bgcolor: 'secondary.main' }}>
-            {/* <LockOutlinedIcon /> */}
-
             <DvijSvg />
           </Avatar>
           <Typography component="h1" variant="h5">

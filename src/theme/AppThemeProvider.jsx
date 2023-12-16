@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import PropTypes from 'prop-types';
 
 const AppThemeProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(false);
-
   const darkTheme = createTheme({
     palette: {
       mode: 'dark',

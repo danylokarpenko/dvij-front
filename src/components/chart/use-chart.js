@@ -96,7 +96,7 @@ export default function useChart(options) {
       borderColor: theme.palette.divider,
       xaxis: {
         lines: {
-          show: false,
+          show: true,
         },
       },
     },
@@ -104,7 +104,7 @@ export default function useChart(options) {
     // Xaxis
     xaxis: {
       labels: {
-        show: false, // Hides X-axis labels
+        show: true, // Hides X-axis labels
       },
       axisBorder: { show: false },
       axisTicks: { show: false },

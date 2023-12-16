@@ -1,19 +1,13 @@
+// Dependencies
 import React from 'react';
-import { Provider } from 'react-redux';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-import App from './App';
+// Routes
+import AppRoutes from './routes';
 
-import store from './store/app/store';
-
-const rootElement = document.getElementById('root')!;
-
-const root = createRoot(rootElement);
-
-root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <Router>
+    <AppRoutes />
+  </Router>
 );

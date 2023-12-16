@@ -1,16 +1,28 @@
 // Example of a file src/api/yourApiFunctions.ts
 
-import { LoginDto } from '../../store/auth/dto/login.dto';
-import { CreateGameDto } from '../../store/game/dto/create-game.dto';
+import { GameI } from '../../store/game/interfaces/game.interface';
 import axiosInstance from '../axiosConfig';
 
-export const getGames = async () => {
-  const response = await axiosInstance.get(`/games`);
+export const getGames = async (filters: any) => {
+  const response = await axiosInstance.get(`/games`, { params: filters });
   return response;
 };
 
 export const getGame = async (id: number) => {
-  const response: CreateGameDto = await axiosInstance.get(`/games/${id}`);
+  const response: GameI = await axiosInstance.get(`/games/${id}`);
+  return response;
+};
+
+export const addGameUser = async (payload: any) => {
+  const response: GameI = await axiosInstance.post(`/gameUsers`, payload);
+  return response;
+};
+
+export const updateGame = async (payload: any) => {
+  const response: GameI = await axiosInstance.put(
+    `/games/${payload.id}`,
+    payload
+  );
   return response;
 };
 

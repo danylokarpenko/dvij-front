@@ -1,38 +1,21 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { FC } from 'react';
 
-import LoginPage from './pages/login';
-import GamesPage from './pages/games';
-import GameInfo from './pages/game';
+import Header from './components/header/Header';
+import { Provider } from 'react-redux';
+import store from './store/store';
+import StickyFooter from './components/Footer/StickyFooter';
 
-const App = () => {
-  const currentUrlPath = window.location.pathname;
-  console.log(currentUrlPath);
+const App: FC<any> = ({ children }) => (
+  <div className="App">
+    <Provider store={store}>
+      <Header />
 
-  return (
-    <>
-      {currentUrlPath !== '/login' && (
-        <HelmetProvider>
-          <Helmet>
-            <title>FRIENDS GAMES</title>
-            <meta name="description" content="Game Incubator" />
-          </Helmet>
-        </HelmetProvider>
-      )}
+      {children}
 
-      <>
-        <Router>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/games" element={<GamesPage />} />
-            <Route path="/games/:id" element={<GameInfo />} />
-            {/* other routes */}
-          </Routes>
-        </Router>
-      </>
-    </>
-  );
-};
+      <StickyFooter />
+    </Provider>
+  </div>
+);
 
 export default App;

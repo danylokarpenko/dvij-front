@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Stack, Typography } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { likeIteration } from '../../../store/iteration/iterationActions';
 
 const defaultIconOptions = {
   style: { width: '25px', height: '25px', padding: 2, marginRight: 2 },
 };
 
 export default function IterationItem({ iteration }) {
-  const { id, description, likes, isApproved, creator } = iteration;
-
+  const { description, likes, creator } = iteration;
+  const dispatch = useDispatch();
   return (
     <Stack
       direction="row"
@@ -42,8 +44,8 @@ export default function IterationItem({ iteration }) {
             likes > 0 ? 'red_heart' : 'grey_heart'
           }.png`}
           alt={'heart'}
-          onClick={() => console.log('like')}
-        />{' '}
+          onClick={() => dispatch(likeIteration(iteration))}
+        />
         {likes}
       </div>
     </Stack>

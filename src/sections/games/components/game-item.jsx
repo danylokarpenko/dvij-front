@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
+import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi';
+import PeopleItem from './people-item';
 
 const sortByIsLead = (array) => {
   return [...array].sort((a, b) => {
-    console.log(a, b);
     if (a.isLead && !b.isLead) {
       return -1; // a comes first
     }
@@ -16,16 +17,22 @@ const sortByIsLead = (array) => {
   });
 };
 
-export default function GamesItem({ game }) {
+export default function GamesItem({
+  game,
+  setAddUserToGameModal,
+  isGamePage,
+  isHitPage,
+}) {
   const { name, publisherName, iconUrl, mainIdea, gameUsers } = game;
   const navigate = useNavigate();
+
   return (
     <Stack
       direction="row"
       alignItems="center"
       spacing={1}
       onClick={() => {
-        navigate(`/games/${game.id}`);
+        navigate(`${window.location.pathname}/${game.id}`);
       }}
     >
       <Box
@@ -66,6 +73,18 @@ export default function GamesItem({ game }) {
           <PeopleItem key={i} gameUser={gameUser} />
         ))}
       </div>
+      {(isGamePage || isHitPage) && (
+        <Button
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+
+            setAddUserToGameModal(true);
+          }}
+        >
+          <SportsKabaddiIcon />
+        </Button>
+      )}
     </Stack>
   );
 }
@@ -79,38 +98,7 @@ GamesItem.propTypes = {
     mainIdea: PropTypes.string.isRequired,
     gameUsers: PropTypes.array.isRequired,
   }),
-};
-
-function PeopleItem({ gameUser }) {
-  const {
-    user: { id, avatarUrl },
-    isLead,
-  } = gameUser;
-
-  return (
-    <Stack direction="row" alignItems="center" spacing={2} marginRight={0.5}>
-      <Box
-        component="img"
-        alt={id}
-        src={avatarUrl}
-        sx={{
-          width: 22,
-          height: 22,
-          borderRadius: 1,
-          flexShrink: 0,
-          border: isLead ? '2px solid #FFC700' : 'none',
-        }}
-      />
-    </Stack>
-  );
-}
-
-PeopleItem.propTypes = {
-  gameUser: PropTypes.shape({
-    user: {
-      id: PropTypes.number.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    },
-    isLead: PropTypes.bool.isRequired,
-  }),
+  setAddUserToGameModal: PropTypes.func,
+  isGamePage: PropTypes.bool,
+  isHitPage: PropTypes.bool,
 };

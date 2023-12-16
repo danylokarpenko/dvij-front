@@ -2,7 +2,8 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://192.168.1.5:3030/api/v1',
+  baseURL: 'http://192.168.0.102:3030/api/v1',
+  // baseURL: 'http://192.168.1.5:3030/api/v1',
   // You can add other default configurations here
 });
 
@@ -32,6 +33,15 @@ axiosInstance.interceptors.response.use(
   (error) => {
     // Any status codes outside the range of 2xx cause this function to trigger
     // You can handle global API error responses here
+    const isAuthError = error.response.status === 401;
+    if (isAuthError) {
+      if (window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
+      if (localStorage.getItem('authToken')) {
+        localStorage.removeItem('authToken');
+      }
+    }
     return Promise.reject(error);
   }
 );
