@@ -9,13 +9,13 @@ import { fetchUser } from '../../store/user/userActions';
 import { selectUser } from '../../store/user/userSelectors';
 import AppThemeProvider from '../../theme/AppThemeProvider';
 const colors = ['#FF37A3', '#15A8FB', '#71FF3F'];
-import { selectCurrentUser } from '../../store';
+
 function valuetext(value) {
   return `${value}$`;
 }
+
 export default function UserInfoView() {
   const { id } = useParams();
-  const logginedUser = useSelector(selectCurrentUser);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 

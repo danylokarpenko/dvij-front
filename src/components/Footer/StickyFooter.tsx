@@ -19,8 +19,6 @@ export default function StickyFooter() {
   const isLogin = window.location.pathname === '/login';
   if (isLogin) return null;
 
-  const currentUserId = localStorage.getItem('userId');
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box
@@ -48,12 +46,6 @@ export default function StickyFooter() {
         >
           <img src={JoystickSvg} alt="games" width={100} />
         </Button>
-        {/* <Button
-          style={{ flex: 0.5, margin: '0 5px', paddingBottom: '50px' }}
-          onClick={() => navigate(`/users/${currentUserId}`)}
-        >
-          <IgokSvg maxWidth={50} maxHeight={50} alt="profile" width={80} />
-        </Button> */}
         <Button
           style={{ flex: 0.5, margin: '0 5px', paddingBottom: '50px' }}
           onClick={() => navigate(`/users`)}

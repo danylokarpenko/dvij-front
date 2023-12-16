@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
-import PropTypes from 'prop-types';
 import Divider from '@mui/material/Divider';
 
 import Scrollbar from '../../components/scrollbar';
@@ -12,14 +11,11 @@ import { fetchUsers } from '../../store/user/userActions';
 import { selectUsers } from '../../store/user/userSelectors';
 import AppThemeProvider from '../../theme/AppThemeProvider';
 import UsersItem from './components/people-item';
-import { selectCurrentUser } from '../../store';
 
-export default function UsersView({ isHitsPage = false }) {
+export default function UsersView() {
   const dispatch = useDispatch();
   const users = useSelector(selectUsers);
   const logginedUserId = localStorage.getItem('userId');
-  console.log(users);
-  console.log(logginedUserId);
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
@@ -48,6 +44,4 @@ export default function UsersView({ isHitsPage = false }) {
   );
 }
 
-UsersView.propTypes = {
-  isHitsPage: PropTypes.bool,
-};
+UsersView.propTypes = {};
