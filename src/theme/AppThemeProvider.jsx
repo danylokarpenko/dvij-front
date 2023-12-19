@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import PropTypes from 'prop-types';
+import { colors } from '../style/constants';
 
 const AppThemeProvider = ({ children }) => {
   const darkTheme = createTheme({
@@ -9,8 +10,8 @@ const AppThemeProvider = ({ children }) => {
       mode: 'dark',
       // Define other dark theme-specific properties
       background: {
-        default: '#252F34', // Set the default background color
-        paper: '#252F34', // Optionally, set the background color for paper components (like Card, Paper)
+        default: colors.background, // Set the default background color
+        paper: colors.background, // Optionally, set the background color for paper components (like Card, Paper)
       },
       link: {
         main: '#80DEEA', // A bright blue

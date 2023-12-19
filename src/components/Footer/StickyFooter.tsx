@@ -4,18 +4,14 @@ import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-// @ts-ignore
 import GobletPng from '../../assets/goblet.png';
-// @ts-ignore
 import GobletActivePng from '../../assets/goblet_active.png';
-// @ts-ignore
 import JoystickPng from '../../assets/joystick.png';
-// @ts-ignore
 import JoystickActivePng from '../../assets/joystick_active.png';
-// @ts-ignore
 import IgoPng from '../../assets/igo.png';
-// @ts-ignore
 import IgoActivePng from '../../assets/igo_active.png';
+
+import { colors, sizes } from '../../style/constants';
 
 const defaultTheme = createTheme();
 
@@ -24,9 +20,11 @@ export default function StickyFooter() {
 
   const isLogin = window.location.pathname === '/login';
   if (isLogin) return null;
-  const isHitPageActive = window.location.pathname === '/hits';
-  const isGamePageActive = window.location.pathname === '/games';
-  const isUserPageActive = window.location.pathname === '/users';
+
+  const isHitPageActive = window.location.pathname.includes('/hits');
+  const isGamePageActive = window.location.pathname.includes('/games');
+  const isUserPageActive = window.location.pathname.includes('/users');
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box
@@ -38,9 +36,9 @@ export default function StickyFooter() {
           bottom: 0,
           left: 0,
           right: 0,
-          background: '#252F34',
+          background: colors.background,
           opacity: 0.98,
-          height: '150px',
+          height: sizes.footerHeight,
         }}
       >
         <Button

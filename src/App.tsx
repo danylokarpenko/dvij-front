@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { FC } from 'react';
 
 import Header from './components/header/Header';
@@ -6,12 +6,17 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 import StickyFooter from './components/Footer/StickyFooter';
 import { Grid } from '@mui/material';
+import { sizes } from './style/constants';
 
-const App: FC<any> = ({ children }) => (
+interface AppProps {
+  children?: ReactNode;
+}
+
+const App: FC<AppProps> = ({ children }) => (
   <div className="App">
     <Provider store={store}>
       <Header />
-      <Grid style={{ paddingBottom: '150px' }}>{children}</Grid>
+      <Grid style={{ paddingBottom: sizes.footerHeight }}>{children}</Grid>
       <StickyFooter />
     </Provider>
   </div>
