@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -12,20 +10,19 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { ReactComponent as DvijSvg } from '../../assets/dvij.svg';
 import { login } from '../../store/auth/authActions';
 import { AppDispatch } from '../../store';
 import AppThemeProvider from '../../theme/AppThemeProvider';
 
-function Copyright(props: any) {
+function Copyright() {
   return (
     <Typography
       variant="body2"
       color="text.secondary"
       align="center"
-      {...props}
+      sx={{ mt: 8, mb: 4 }}
     >
       {'Copyright © '}
       <Link color="inherit" href="https://ddd.dvij.com/">
@@ -98,10 +95,10 @@ export default function LoginComponent() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
@@ -112,7 +109,7 @@ export default function LoginComponent() {
             </Button>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        <Copyright />
       </Container>
     </AppThemeProvider>
   );

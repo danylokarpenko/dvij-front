@@ -13,11 +13,11 @@ import { selectGames } from '../../store/game/gameSelectors';
 import AppThemeProvider from '../../theme/AppThemeProvider';
 import GamesItem from './components/game-item';
 
-export default function GamesView({ isHitsPage = false }) {
+export default function GamesView({ isHitPage = false }) {
   const dispatch = useDispatch();
   const games = useSelector(selectGames);
   useEffect(() => {
-    dispatch(fetchGames({ isHit: isHitsPage }));
+    dispatch(fetchGames({ isHit: isHitPage }));
   }, [dispatch]);
   return (
     <AppThemeProvider>
@@ -38,5 +38,5 @@ export default function GamesView({ isHitsPage = false }) {
 }
 
 GamesView.propTypes = {
-  isHitsPage: PropTypes.bool,
+  isHitPage: PropTypes.bool,
 };

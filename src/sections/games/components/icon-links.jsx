@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Stack } from '@mui/material';
 
-import { Box, Button, Stack } from '@mui/material';
 import ResponsiveDialog from '../../../components/modal/modal';
 import AddIconLinkForm from '../../../components/Forms/AddIconLinkForm';
 import useLongPress from '../../../hooks/useLongPress';
+import GitPng from '../../../assets/git.png';
+import GoogleDrivePng from '../../../assets/google_drive.png';
+import GooglePlayPng from '../../../assets/google_play.png';
+import IStorePng from '../../../assets/iStore.png';
+import TrelloPng from '../../../assets/trello.png';
 
 const defaultIconStyle = (name) => ({
   width: '25px',
@@ -53,32 +58,32 @@ export default function IconLinks({ game }) {
         {...longPressEvent('iStoreLink')}
         draggable={false}
         style={{ ...defaultIconStyle(iStoreLink) }}
-        src={'../../../../assets/iStore.png'}
+        src={IStorePng}
         alt={game.name}
         open
       />
       <img
         {...longPressEvent('googleStoreLink')}
         style={{ ...defaultIconStyle(googleStoreLink) }}
-        src={'../../../../assets/google_play.png'}
+        src={GooglePlayPng}
         alt={game.name}
       />
       <img
         {...longPressEvent('gitLink')}
         style={{ ...defaultIconStyle(gitLink) }}
-        src={'../../../../assets/git.png'}
+        src={GitPng}
         alt={game.name}
       />
       <img
         {...longPressEvent('googleDriveLink')}
         style={{ ...defaultIconStyle(googleDriveLink) }}
-        src={'../../../../assets/google_drive.png'}
+        src={GoogleDrivePng}
         alt={game.name}
       />
       <img
         {...longPressEvent('trelloLink')}
         style={{ ...defaultIconStyle(trelloLink) }}
-        src={'../../../../assets/trello.png'}
+        src={TrelloPng}
         alt={game.name}
       />
     </Stack>

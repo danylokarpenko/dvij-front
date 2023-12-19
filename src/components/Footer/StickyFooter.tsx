@@ -7,9 +7,15 @@ import { useNavigate } from 'react-router-dom';
 // @ts-ignore
 import GobletPng from '../../assets/goblet.png';
 // @ts-ignore
-import JoystickSvg from '../../assets/joy.png';
+import GobletActivePng from '../../assets/goblet_active.png';
 // @ts-ignore
-import { ReactComponent as IgokSvg } from '../../assets/igo.svg';
+import JoystickPng from '../../assets/joystick.png';
+// @ts-ignore
+import JoystickActivePng from '../../assets/joystick_active.png';
+// @ts-ignore
+import IgoPng from '../../assets/igo.png';
+// @ts-ignore
+import IgoActivePng from '../../assets/igo_active.png';
 
 const defaultTheme = createTheme();
 
@@ -18,7 +24,9 @@ export default function StickyFooter() {
 
   const isLogin = window.location.pathname === '/login';
   if (isLogin) return null;
-
+  const isHitPageActive = window.location.pathname === '/hits';
+  const isGamePageActive = window.location.pathname === '/games';
+  const isUserPageActive = window.location.pathname === '/users';
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box
@@ -30,27 +38,44 @@ export default function StickyFooter() {
           bottom: 0,
           left: 0,
           right: 0,
-          backgroundColor: 'gradient #000000 40%, #000000 100%',
-          height: '100px',
+          background: '#252F34',
+          opacity: 0.98,
+          height: '150px',
         }}
       >
         <Button
-          style={{ flex: 0.5, margin: '0 5px', paddingBottom: '50px' }}
+          style={{ flex: 0.5, margin: '0 5px' }}
           onClick={() => navigate('/hits')}
         >
-          <img src={GobletPng} alt="games" width={50} />
+          <img
+            src={isHitPageActive ? GobletActivePng : GobletPng}
+            alt="goblet"
+            width={isHitPageActive ? 200 : 60}
+            height={isHitPageActive ? 200 : 110}
+          />
         </Button>
         <Button
-          style={{ flex: 0.5, margin: '0 5px', paddingBottom: '50px' }}
+          style={{ flex: 0.5, margin: '0 5px' }}
           onClick={() => navigate('/games')}
         >
-          <img src={JoystickSvg} alt="games" width={100} />
+          <img
+            src={isGamePageActive ? JoystickActivePng : JoystickPng}
+            alt="games"
+            width={isGamePageActive ? 100 : 85}
+            height={isGamePageActive ? 100 : 75}
+          />
         </Button>
         <Button
-          style={{ flex: 0.5, margin: '0 5px', paddingBottom: '50px' }}
+          type="button"
+          style={{ flex: 0.5, margin: '0 5px' }}
           onClick={() => navigate(`/users`)}
         >
-          <IgokSvg maxWidth={50} maxHeight={50} alt="profile" width={80} />
+          <img
+            src={isUserPageActive ? IgoActivePng : IgoPng}
+            alt="users"
+            width={100}
+            height={100}
+          />
         </Button>
       </Box>
     </ThemeProvider>

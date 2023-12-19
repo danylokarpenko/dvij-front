@@ -17,14 +17,13 @@ const sortByIsLead = (array) => {
   });
 };
 
-export default function GamesItem({
-  game,
-  setAddUserToGameModal,
-  isGamePage,
-  isHitPage,
-}) {
+export default function GamesItem({ game, setAddUserToGameModal }) {
   const { name, publisherName, iconUrl, mainIdea, gameUsers } = game;
   const navigate = useNavigate();
+
+  const showAddUSerBtn =
+    window.location.pathname.includes('games/') ||
+    window.location.pathname.includes('hits/');
 
   return (
     <Stack
@@ -34,6 +33,7 @@ export default function GamesItem({
       onClick={() => {
         navigate(`${window.location.pathname}/${game.id}`);
       }}
+      style={{ height: '70px' }}
     >
       <Box
         component="img"
@@ -68,12 +68,20 @@ export default function GamesItem({
         </Typography>
       </Box>
 
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'start',
+          width: '100%',
+          justifyContent: 'end',
+          height: '100%',
+        }}
+      >
         {sortByIsLead(gameUsers).map((gameUser, i) => (
           <PeopleItem key={i} gameUser={gameUser} />
         ))}
       </div>
-      {(isGamePage || isHitPage) && (
+      {showAddUSerBtn && (
         <Button
           onClick={(e) => {
             e.stopPropagation();

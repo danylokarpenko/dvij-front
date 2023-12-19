@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Box, Stack, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { likeIteration } from '../../../store/iteration/iterationActions';
+import HeartPng from '../../../assets/heart.png';
+import HeartActivePng from '../../../assets/heart_active.png';
 
 const defaultIconOptions = {
   style: { width: '25px', height: '25px', padding: 2, marginRight: 2 },
@@ -13,12 +15,12 @@ export default function IterationItem({ iteration }) {
   const dispatch = useDispatch();
   return (
     <Stack
+      paddingTop={1}
+      paddingLeft={1}
+      paddingRight={1}
       direction="row"
       alignItems="center"
       spacing={1}
-      // onClick={() => {
-      //   navigate(`/games/${game.id}`);
-      // }}
     >
       <Box
         component="img"
@@ -37,12 +39,17 @@ export default function IterationItem({ iteration }) {
         </Typography>
       </Box>
 
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'end',
+          width: '100%',
+        }}
+      >
         <img
           {...defaultIconOptions}
-          src={`../../../../assets/${
-            likes > 0 ? 'red_heart' : 'grey_heart'
-          }.png`}
+          src={likes > 0 ? HeartActivePng : HeartPng}
           alt={'heart'}
           onClick={() => dispatch(likeIteration(iteration))}
         />
