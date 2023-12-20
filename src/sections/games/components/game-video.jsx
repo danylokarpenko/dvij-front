@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import ReactPlayer from 'react-player';
 import ResponsiveDialog from '../../../components/modal/modal';
 import AddIconLinkForm from '../../../components/Forms/AddIconLinkForm';
-import useLongPress from '../../../hooks/useLongPress';
+// import useLongPress from '../../../hooks/useLongPress';
+
 export default function GameVideo({ game }) {
   const [linkColumnName, setLinkColumnName] = useState(null);
-  const [isLoading, setLoading] = useState(true);
-  const onLongPress = (linkColumnName) => {
-    setLinkColumnName(linkColumnName);
-  };
+  // const [isLoading, setLoading] = useState(true);
+  // const onLongPress = (linkColumnName) => {
+  //   setLinkColumnName(linkColumnName);
+  // };
 
-  const onClick = (link) => {
-    window.open(link, '_blank');
-  };
+  // const onClick = (link) => {
+  //   window.open(link, '_blank');
+  // };
 
-  const longPressEvent = (linkColumnName) =>
-    useLongPress(
-      () => onLongPress(linkColumnName),
-      () => onClick(game[linkColumnName])
-    );
+  // const longPressEvent = (linkColumnName) =>
+  //   useLongPress(
+  //     () => onLongPress(linkColumnName),
+  //     () => onClick(game[linkColumnName])
+  //   );
+
   return (
     <>
       <ResponsiveDialog
@@ -33,26 +36,15 @@ export default function GameVideo({ game }) {
           />
         )}
       </ResponsiveDialog>
-      {isLoading && <div style={{ marginTop: 20 }}>Loading...</div>}{' '}
-      <video
-        {...longPressEvent('videoUrl')}
-        style={{
-          width: '150px',
-          height: '150px',
-          border: !game.videoUrl ? '1px solid red' : 'none',
-        }}
-        autoPlay
-        loop
-        muted
-        playsInline
-        poster={game.videoUrl || 'https://assets.codepen.io/6093409/river.jpg'}
-        onLoadedData={() => setLoading(false)}
-      >
-        <source
-          src={game.videoUrl || 'https://assets.codepen.io/6093409/river.mp4'}
-          type="video/mp4"
-        />
-      </video>
+
+      <ReactPlayer
+        playing={true}
+        muted={true}
+        loop={true}
+        height={'auto'}
+        width={'auto'}
+        url={game.videoUrl || 'https://www.youtube.com/watch?v=p1arBo4KUcM'}
+      />
     </>
   );
 }

@@ -76,7 +76,7 @@ export default function GameInfoView({ isHitPage }) {
             setAddUserToGameModal={setAddUserToGameModal}
           />
           <div style={{ display: 'flex' }}>
-            {isHitPage && <GameVideo game={game} />}
+            <GameVideo game={game} />
             <GameChart game={game} />
           </div>
           <IconLinks game={game} />
