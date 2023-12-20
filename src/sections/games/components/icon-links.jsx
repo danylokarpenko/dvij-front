@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Stack } from '@mui/material';
 
 import ResponsiveDialog from '../../../components/modal/modal';
-import AddIconLinkForm from '../../../components/Forms/AddIconLinkForm';
+import AddIconLinkForm from '../../../components/Forms/EditGamePartialForm';
 import useLongPress from '../../../hooks/useLongPress';
 import GitPng from '../../../assets/git.png';
 import GoogleDrivePng from '../../../assets/google_drive.png';
@@ -20,33 +20,33 @@ const defaultIconStyle = (name) => ({
 });
 
 export default function IconLinks({ game }) {
-  const [linkColumnName, setLinkColumnName] = useState(null);
+  const [gameColumnNameToEdit, setLinkColumnName] = useState(null);
   const { iStoreLink, googleStoreLink, gitLink, googleDriveLink, trelloLink } =
     game;
 
-  const onLongPress = (linkColumnName) => {
-    setLinkColumnName(linkColumnName);
+  const onLongPress = (gameColumnNameToEdit) => {
+    setLinkColumnName(gameColumnNameToEdit);
   };
 
   const onClick = (link) => {
     window.open(link, '_blank');
   };
 
-  const longPressEvent = (linkColumnName) =>
+  const longPressEvent = (gameColumnNameToEdit) =>
     useLongPress(
-      () => onLongPress(linkColumnName),
-      () => onClick(game[linkColumnName])
+      () => onLongPress(gameColumnNameToEdit),
+      () => onClick(game[gameColumnNameToEdit])
     );
 
   return (
     <Stack direction="row">
       <ResponsiveDialog
-        open={Boolean(linkColumnName)}
+        open={Boolean(gameColumnNameToEdit)}
         setOpen={setLinkColumnName}
       >
-        {linkColumnName && (
+        {gameColumnNameToEdit && (
           <AddIconLinkForm
-            linkColumnName={linkColumnName}
+            gameColumnNameToEdit={gameColumnNameToEdit}
             game={game}
             callback={() => setLinkColumnName(null)}
           />

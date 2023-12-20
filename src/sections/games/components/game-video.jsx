@@ -2,35 +2,35 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
 import ResponsiveDialog from '../../../components/modal/modal';
-import AddIconLinkForm from '../../../components/Forms/AddIconLinkForm';
+import AddIconLinkForm from '../../../components/Forms/EditGamePartialForm';
 // import useLongPress from '../../../hooks/useLongPress';
 
 export default function GameVideo({ game }) {
-  const [linkColumnName, setLinkColumnName] = useState(null);
+  const [gameColumnNameToEdit, setLinkColumnName] = useState(null);
   // const [isLoading, setLoading] = useState(true);
-  // const onLongPress = (linkColumnName) => {
-  //   setLinkColumnName(linkColumnName);
+  // const onLongPress = (gameColumnNameToEdit) => {
+  //   setLinkColumnName(gameColumnNameToEdit);
   // };
 
   // const onClick = (link) => {
   //   window.open(link, '_blank');
   // };
 
-  // const longPressEvent = (linkColumnName) =>
+  // const longPressEvent = (gameColumnNameToEdit) =>
   //   useLongPress(
-  //     () => onLongPress(linkColumnName),
-  //     () => onClick(game[linkColumnName])
+  //     () => onLongPress(gameColumnNameToEdit),
+  //     () => onClick(game[gameColumnNameToEdit])
   //   );
 
   return (
     <>
       <ResponsiveDialog
-        open={Boolean(linkColumnName)}
+        open={Boolean(gameColumnNameToEdit)}
         setOpen={setLinkColumnName}
       >
-        {linkColumnName && (
+        {gameColumnNameToEdit && (
           <AddIconLinkForm
-            linkColumnName={'videoUrl'}
+            gameColumnNameToEdit={'videoUrl'}
             game={game}
             callback={() => setLinkColumnName(null)}
           />

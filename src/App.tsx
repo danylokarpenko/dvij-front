@@ -16,7 +16,15 @@ const App: FC<AppProps> = ({ children }) => (
   <div className="App">
     <Provider store={store}>
       <Header />
-      <Grid style={{ paddingBottom: sizes.footerHeight }}>{children}</Grid>
+      <Grid
+        style={{
+          paddingBottom: sizes.footerHeight,
+          paddingRight: 10,
+          paddingLeft: 10,
+        }}
+      >
+        {children}
+      </Grid>
       <StickyFooter />
     </Provider>
   </div>

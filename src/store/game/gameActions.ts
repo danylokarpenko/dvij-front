@@ -66,7 +66,10 @@ export const createGameUser = createAsyncThunk(
 export const updateGame = createAsyncThunk(
   'iterations/updateGame',
   async (
-    { payload, linkColumnName }: { payload: any; linkColumnName: string },
+    {
+      payload,
+      gameColumnNameToEdit,
+    }: { payload: any; gameColumnNameToEdit: string },
     { dispatch, rejectWithValue, getState }
   ) => {
     try {
@@ -76,7 +79,7 @@ export const updateGame = createAsyncThunk(
         fetchGameSuccess({
           ...game,
           // @ts-ignore
-          [linkColumnName]: updatedGame[linkColumnName],
+          [gameColumnNameToEdit]: updatedGame[gameColumnNameToEdit],
         })
       );
       return updatedGame;

@@ -23,12 +23,13 @@ import { selectCurrentUser } from '../../store';
 import IterationForm from '../../components/Forms/IterationForm';
 import AddGameUserForm from '../../components/Forms/AddGameUserForm';
 import IconLinks from './components/icon-links';
+import MainTask from './components/main-task';
 
 const sortByLikes = (array) => {
   return [...array].sort((a, b) => b.likes - a.likes);
 };
 
-export default function GameInfoView({ isHitPage }) {
+export default function GameInfoView() {
   const { id } = useParams();
   const user = useSelector(selectCurrentUser);
   const game = useSelector(selectGame);
@@ -46,7 +47,7 @@ export default function GameInfoView({ isHitPage }) {
 
   return (
     <AppThemeProvider>
-      <Grid xs={12} md={6} lg={8}>
+      <Grid>
         <ResponsiveDialog
           open={iterationModalOpen}
           setOpen={setOpenIterationModal}
@@ -66,7 +67,7 @@ export default function GameInfoView({ isHitPage }) {
           />
         </ResponsiveDialog>
 
-        <Card>
+        <Grid>
           Release: {game.releaseDate}
           <GamesItem
             isGamePage={window.location.pathname.includes('games')}
@@ -75,12 +76,13 @@ export default function GameInfoView({ isHitPage }) {
             game={game}
             setAddUserToGameModal={setAddUserToGameModal}
           />
+          <MainTask game={game} />
           <div style={{ display: 'flex' }}>
             <GameVideo game={game} />
             <GameChart game={game} />
           </div>
           <IconLinks game={game} />
-          <Card>
+          <Grid>
             <Scrollbar>
               <Stack spacing={1} sx={{ p: 0, pr: 0 }}>
                 {sortByLikes(game.iterations).map((iteration) => (
@@ -95,8 +97,8 @@ export default function GameInfoView({ isHitPage }) {
             >
               <SportsKabaddiIcon />
             </Button>
-          </Card>
-        </Card>
+          </Grid>
+        </Grid>
       </Grid>
     </AppThemeProvider>
   );

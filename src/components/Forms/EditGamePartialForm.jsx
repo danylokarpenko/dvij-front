@@ -7,11 +7,13 @@ import { Form, Formik } from 'formik';
 import { updateGame } from '../../store/game/gameActions';
 import { FormField } from '../FormikFields/FormField';
 
-const formColumns = (linkColumnName) => [
+const formColumns = (gameColumnNameToEdit) => [
   {
-    name: linkColumnName,
+    name: gameColumnNameToEdit,
     type: 'text',
-    label: linkColumnName ? `Link to ${linkColumnName}` : 'Link',
+    label: gameColumnNameToEdit
+      ? `Game Column ${gameColumnNameToEdit}`
+      : 'Game Column',
     style: { minWidth: 200 },
   },
 ];
@@ -20,7 +22,12 @@ const renderFormField = ({ ...fieldProps }, i) => (
   <FormField key={fieldProps.name || i} {...fieldProps} />
 );
 
-export default function AddIconLinkForm({ linkColumnName, game, callback }) {
+export default function EditGamePartialForm({
+  gameColumnNameToEdit,
+  game,
+  callback,
+}) {
+  console.log('gameColumnNameToEdit', gameColumnNameToEdit);
   const dispatch = useDispatch();
 
   const handleSubmit = (form) => {
@@ -31,7 +38,7 @@ export default function AddIconLinkForm({ linkColumnName, game, callback }) {
       ...form,
     };
 
-    dispatch(updateGame({ payload, linkColumnName }));
+    dispatch(updateGame({ payload, gameColumnNameToEdit }));
     callback();
   };
 
@@ -40,13 +47,13 @@ export default function AddIconLinkForm({ linkColumnName, game, callback }) {
       <Formik
         initialValues={{
           id: game.id,
-          [linkColumnName]: game[linkColumnName],
+          [gameColumnNameToEdit]: game[gameColumnNameToEdit],
         }}
         onSubmit={handleSubmit}
       >
         {({ submitForm, isSubmitting }) => (
           <Form>
-            {formColumns(linkColumnName).map(renderFormField)}
+            {formColumns(gameColumnNameToEdit).map(renderFormField)}
             <br />
             <Button
               variant="contained"
@@ -72,10 +79,10 @@ export default function AddIconLinkForm({ linkColumnName, game, callback }) {
   );
 }
 
-AddIconLinkForm.propTypes = {
+EditGamePartialForm.propTypes = {
   game: PropTypes.shape({
     id: PropTypes.number.isRequired,
   }),
   callback: PropTypes.func,
-  linkColumnName: PropTypes.string.isRequired,
+  gameColumnNameToEdit: PropTypes.string.isRequired,
 };
