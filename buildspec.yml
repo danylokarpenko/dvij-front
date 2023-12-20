@@ -1,0 +1,26 @@
+version: 0.2
+phases:
+  install:
+    on-failure: ABORT
+    commands:
+      # export variables to build
+      - export PORT=${PORT}
+      - export REACT_APP_API_URL=${REACT_APP_API_URL}
+      # install node 14v
+      - apt update
+      - curl -sL https://deb.nodesource.com/setup_14.x | bash -
+      - apt -y install nodejs
+      - node  -v
+      # Install dependencies needed for build
+      - yarn install
+      # Upgrade AWS CLI to the latest version
+      - pip install --upgrade awscli
+  build:
+    on-failure: ABORT
+    commands:
+      - yarn run build:prod
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: no
+  base-directory: build
