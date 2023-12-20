@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { TextField } from 'formik-material-ui';
 import { Field, Form, Formik } from 'formik';
 import { Box, Button } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import {
-  createIteration,
-  fetchIteration,
-} from '../../store/iteration/iterationActions';
+import { fetchIdea, createIdea } from '../../store/ideas/ideaActions';
 
 const columns = [{ name: 'description' }];
 
@@ -20,13 +17,13 @@ const renderColumn = (c) => (
   />
 );
 
-export default function IterationForm({ iteration, callback }) {
+export default function IdeaForm({ idea, callback }) {
   const dispatch = useDispatch();
   useEffect(() => {
-    if (iteration.id) dispatch(fetchIteration(iteration.id));
+    if (idea.id) dispatch(fetchIdea(idea.id));
   }, [dispatch]);
 
-  if (!iteration) {
+  if (!idea) {
     return null;
   }
 
@@ -37,7 +34,7 @@ export default function IterationForm({ iteration, callback }) {
       ...form,
     };
 
-    dispatch(createIteration(payload));
+    dispatch(createIdea(payload));
     callback();
   };
 
@@ -45,7 +42,7 @@ export default function IterationForm({ iteration, callback }) {
     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
       <Formik
         initialValues={{
-          ...iteration,
+          ...idea,
           description: '',
           likes: [],
           isApproved: false,
@@ -80,8 +77,8 @@ export default function IterationForm({ iteration, callback }) {
   );
 }
 
-IterationForm.propTypes = {
-  iteration: PropTypes.shape({
+IdeaForm.propTypes = {
+  idea: PropTypes.shape({
     id: PropTypes.number.isRequired,
     gameId: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,

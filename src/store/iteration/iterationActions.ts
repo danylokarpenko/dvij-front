@@ -48,11 +48,15 @@ export const fetchIteration = createAsyncThunk(
 export const likeIteration = createAsyncThunk(
   'iterations/likeIteration',
   async (iteration: IterationI, { dispatch, rejectWithValue, getState }) => {
+    const userId = localStorage.getItem('userId');
+
     try {
       dispatch(likeIterationStart());
       const response = await Iteration.putIteration({
         ...iteration,
-        likes: iteration.likes + 1,
+        likes: iteration.likes.includes(Number(userId))
+          ? iteration.likes.filter((id: number) => id !== Number(userId))
+          : [...iteration.likes, Number(userId)],
       });
 
       const game = selectGame(getState() as RootState);

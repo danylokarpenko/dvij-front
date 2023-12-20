@@ -1,8 +1,6 @@
-export interface IterationI {
+export interface IdeaI {
   id: number;
   creatorId: number;
-  hitId: number;
-  iterationId: number;
   description: string;
   likes: number[];
   isApproved: boolean;

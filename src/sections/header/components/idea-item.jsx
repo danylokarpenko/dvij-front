@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Stack, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { likeIteration } from '../../../store/iteration/iterationActions';
+
 import HeartPng from '../../../assets/heart.png';
 import HeartActivePng from '../../../assets/heart_active.png';
+import { likeIdea } from '../../../store/ideas/ideaActions';
 
 const defaultIconOptions = {
   style: { width: '25px', height: '25px', padding: 2, marginRight: 2 },
 };
 
-export default function IterationItem({ iteration }) {
-  const { description, likes, creator } = iteration;
+export default function IdeaItem({ idea }) {
+  const { description, likes, creator } = idea;
   const dispatch = useDispatch();
   return (
     <Stack
@@ -51,7 +52,7 @@ export default function IterationItem({ iteration }) {
           {...defaultIconOptions}
           src={likes > 0 ? HeartActivePng : HeartPng}
           alt={'heart'}
-          onClick={() => dispatch(likeIteration(iteration))}
+          onClick={() => dispatch(likeIdea(idea))}
         />
         {likes.length}
       </div>
@@ -59,8 +60,8 @@ export default function IterationItem({ iteration }) {
   );
 }
 
-IterationItem.propTypes = {
-  iteration: PropTypes.shape({
+IdeaItem.propTypes = {
+  idea: PropTypes.shape({
     id: PropTypes.number.isRequired,
     likes: PropTypes.array.isRequired,
     description: PropTypes.string.isRequired,

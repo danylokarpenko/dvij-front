@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { FC } from 'react';
 
-import Header from './components/header/Header';
+import Header from './sections/header/Header';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import StickyFooter from './components/Footer/StickyFooter';

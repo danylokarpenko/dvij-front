@@ -6,8 +6,15 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { Typography } from '@mui/material';
 
-export default function ResponsiveDialog({ open, setOpen, title, children }) {
+export default function ResponsiveDialog({
+  open,
+  setOpen,
+  title,
+  children,
+  isFullScreen,
+}) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
 
@@ -22,9 +29,14 @@ export default function ResponsiveDialog({ open, setOpen, title, children }) {
         open={open}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
+        fullWidth={isFullScreen}
       >
         {title && (
-          <DialogTitle id="responsive-dialog-title">{title}</DialogTitle>
+          <DialogTitle id="responsive-dialog-title">
+            <Typography variant="h5" align="center">
+              {title}
+            </Typography>
+          </DialogTitle>
         )}
         <DialogContent>
           <DialogContentText>{children}</DialogContentText>
@@ -36,8 +48,8 @@ export default function ResponsiveDialog({ open, setOpen, title, children }) {
 
 ResponsiveDialog.propTypes = {
   open: PropTypes.bool,
-
   setOpen: PropTypes.func,
   title: PropTypes.string,
   children: PropTypes.node,
+  isFullScreen: PropTypes.bool,
 };
