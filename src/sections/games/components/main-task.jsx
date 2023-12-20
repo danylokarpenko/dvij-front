@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
 import { ReactComponent as MainTaskSvg } from '../../../assets/mainTask.svg';
 import useLongPress from '../../../hooks/useLongPress';
 import ResponsiveDialog from '../../../components/modal/modal';
@@ -10,15 +9,13 @@ export default function MainTask({ game }) {
   const { mainTask } = game;
   const [isMainTaskFormModalOpen, setIsMainTaskFormModalOpen] = useState(null);
 
-  const dispatch = useDispatch();
-
   const onLongPress = () => {
     setIsMainTaskFormModalOpen(true);
   };
 
   const longPressEvent = (gameColumnNameToEdit) =>
     useLongPress(() => onLongPress(gameColumnNameToEdit));
-  console.log('game', game);
+
   return (
     <div>
       <ResponsiveDialog
