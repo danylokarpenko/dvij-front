@@ -70,8 +70,6 @@ export default function GameInfoView() {
         <Grid>
           Release: {game.releaseDate}
           <GamesItem
-            isGamePage={window.location.pathname.includes('games')}
-            isHitPage={window.location.pathname.includes('hits')}
             key={game.id}
             game={game}
             setAddUserToGameModal={setAddUserToGameModal}
@@ -89,14 +87,14 @@ export default function GameInfoView() {
                   <IterationItem key={iteration.id} iteration={iteration} />
                 ))}
               </Stack>
+              <Button
+                onClick={() => {
+                  setOpenIterationModal(true);
+                }}
+              >
+                <SportsKabaddiIcon />
+              </Button>
             </Scrollbar>
-            <Button
-              onClick={() => {
-                setOpenIterationModal(true);
-              }}
-            >
-              <SportsKabaddiIcon />
-            </Button>
           </Grid>
         </Grid>
       </Grid>

@@ -38,7 +38,7 @@ export default function GameVideo({ game }) {
       </ResponsiveDialog>
 
       <ReactPlayer
-        playing={true}
+        playing={false}
         muted={true}
         loop={true}
         height={'auto'}

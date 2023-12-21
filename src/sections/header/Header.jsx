@@ -54,7 +54,7 @@ const Header = () => {
       <FGTextSvg width={100} height={100} />
       <div style={{ flex: 1, display: 'flex', justifyContent: 'end' }}>
         <IdeaSvg
-          style={{ margin: '5px 3px' }}
+          style={{ margin: '5px 3px', cursor: 'pointer' }}
           width={45}
           height={45}
           onClick={openIdeasModal}

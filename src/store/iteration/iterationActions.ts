@@ -9,6 +9,7 @@ import {
   fetchIterationsStart,
   fetchIterationsSuccess,
   likeIterationStart,
+  updateIterationStart,
 } from './iterationSlice';
 import { IterationI } from './interfaces/iteration.interface';
 import { RootState } from '../store';
@@ -45,6 +46,28 @@ export const fetchIteration = createAsyncThunk(
   }
 );
 
+export const deleteIteration = createAsyncThunk(
+  'iterations/deleteIteration',
+  async (id: number, { dispatch, rejectWithValue, getState }) => {
+    try {
+      // dispatch(deleteIterationStart());
+      const response = await Iteration.deleteIteration(id);
+      const game = selectGame(getState() as RootState);
+      dispatch(
+        fetchGameSuccess({
+          ...game,
+          iterations: game.iterations.filter((i: IterationI) => i.id !== id),
+        })
+      );
+      return response;
+      return response;
+    } catch (error: any) {
+      dispatch(iterationsFailure(error.message));
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const likeIteration = createAsyncThunk(
   'iterations/likeIteration',
   async (iteration: IterationI, { dispatch, rejectWithValue, getState }) => {
@@ -57,6 +80,35 @@ export const likeIteration = createAsyncThunk(
         likes: iteration.likes.includes(Number(userId))
           ? iteration.likes.filter((id: number) => id !== Number(userId))
           : [...iteration.likes, Number(userId)],
+      });
+
+      const game = selectGame(getState() as RootState);
+      dispatch(
+        fetchGameSuccess({
+          ...game,
+          iterations: game.iterations.map((i: IterationI) =>
+            i.id === response.id ? response : i
+          ),
+        })
+      );
+      return response;
+    } catch (error: any) {
+      dispatch(iterationsFailure(error.message));
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updateIteration = createAsyncThunk(
+  'iterations/updateIteration',
+  async (
+    { payload: iteration }: { payload: IterationI },
+    { dispatch, rejectWithValue, getState }
+  ) => {
+    try {
+      dispatch(updateIterationStart());
+      const response = await Iteration.putIteration({
+        ...iteration,
       });
 
       const game = selectGame(getState() as RootState);

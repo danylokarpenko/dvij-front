@@ -46,6 +46,15 @@ const iterationSlice = createSlice({
       state.error = null;
     },
 
+    updateIterationStart(state) {
+      state.isLoading = true;
+    },
+    updateIterationSuccess(state, action: PayloadAction<IterationI>) {
+      state.current = action.payload;
+      state.isLoading = false;
+      state.error = null;
+    },
+
     createIterationStart(state) {
       state.isLoading = true;
     },
@@ -74,6 +83,9 @@ export const {
 
   likeIterationStart,
   likeIterationSuccess,
+
+  updateIterationStart,
+  updateIterationSuccess,
 
   createIterationStart,
   createIterationSuccess,

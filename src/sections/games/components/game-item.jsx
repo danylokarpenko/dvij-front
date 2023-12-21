@@ -18,12 +18,12 @@ const sortByIsLead = (array) => {
 };
 
 export default function GamesItem({ game, setAddUserToGameModal }) {
-  const { name, publisherName, iconUrl, mainIdea, gameUsers } = game;
+  const { name, publisherName, iconUrl, mainTask, gameUsers } = game;
   const navigate = useNavigate();
 
-  const showAddUSerBtn =
-    window.location.pathname.includes('games/') ||
-    window.location.pathname.includes('hits/');
+  const isListView =
+    window.location.pathname === '/games' ||
+    window.location.pathname === '/hits';
 
   return (
     <Stack
@@ -31,7 +31,7 @@ export default function GamesItem({ game, setAddUserToGameModal }) {
       alignItems="center"
       spacing={1}
       onClick={() => {
-        navigate(`${window.location.pathname}/${game.id}`);
+        if (isListView) navigate(`${window.location.pathname}/${game.id}`);
       }}
       style={{ height: '70px' }}
     >
@@ -59,13 +59,15 @@ export default function GamesItem({ game, setAddUserToGameModal }) {
           {publisherName}
         </Typography>
 
-        <Typography
-          fontSize={10}
-          sx={{ color: 'text.secondary', flexGrow: 0 }}
-          noWrap
-        >
-          {mainIdea}
-        </Typography>
+        {isListView && (
+          <Typography
+            fontSize={10}
+            sx={{ color: 'text.secondary', flexGrow: 0 }}
+            noWrap
+          >
+            {mainTask}
+          </Typography>
+        )}
       </Box>
 
       <div
@@ -81,17 +83,25 @@ export default function GamesItem({ game, setAddUserToGameModal }) {
           <PeopleItem key={i} gameUser={gameUser} />
         ))}
       </div>
-      {showAddUSerBtn && (
-        <Button
-          onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-
-            setAddUserToGameModal(true);
+      {!isListView && (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'start',
+            height: '100%',
           }}
         >
-          <SportsKabaddiIcon />
-        </Button>
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+
+              setAddUserToGameModal(true);
+            }}
+          >
+            <SportsKabaddiIcon />
+          </Button>
+        </div>
       )}
     </Stack>
   );
@@ -104,9 +114,8 @@ GamesItem.propTypes = {
     publisherName: PropTypes.string.isRequired,
     iconUrl: PropTypes.string.isRequired,
     mainIdea: PropTypes.string.isRequired,
+    mainTask: PropTypes.string.isRequired,
     gameUsers: PropTypes.array.isRequired,
   }),
   setAddUserToGameModal: PropTypes.func,
-  isGamePage: PropTypes.bool,
-  isHitPage: PropTypes.bool,
 };

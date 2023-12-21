@@ -19,6 +19,11 @@ export const createIteration = async (iteration: IterationI) => {
   return response;
 };
 
+export const deleteIteration = async (id: number) => {
+  const response: IterationI = await axiosInstance.delete(`/iterations/${id}`);
+  return response;
+};
+
 export const putIteration = async (iteration: IterationI) => {
   const response: IterationI = await axiosInstance.put(
     `/iterations/${iteration.id}`,

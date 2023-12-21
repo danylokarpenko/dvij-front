@@ -17,6 +17,7 @@ const defaultIconStyle = (name) => ({
   padding: 2,
   marginRight: 2,
   border: !name ? '2px solid red' : 'none',
+  cursor: 'pointer',
 });
 
 export default function IconLinks({ game }) {

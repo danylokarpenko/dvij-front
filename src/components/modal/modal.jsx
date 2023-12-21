@@ -30,6 +30,7 @@ export default function ResponsiveDialog({
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
         fullWidth={isFullScreen}
+        zIndex={99999}
       >
         {title && (
           <DialogTitle id="responsive-dialog-title">

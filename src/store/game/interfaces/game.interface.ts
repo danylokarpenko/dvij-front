@@ -4,6 +4,7 @@ export interface GameI {
   videoUrl: string;
   iconUrl: string;
   publisherUrl: string;
+  mainTask: string;
   releaseDate: Date;
   lastPatchDate?: Date;
   cpi: number;

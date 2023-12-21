@@ -29,7 +29,12 @@ export default function MainTask({ game }) {
         />
       </ResponsiveDialog>
       <div
-        style={{ display: 'flex', alignContent: 'center', padding: 5 }}
+        style={{
+          display: 'flex',
+          alignContent: 'center',
+          padding: 5,
+          cursor: 'pointer',
+        }}
         {...longPressEvent('mainTask')}
       >
         {mainTask} <MainTaskSvg height={20} />
