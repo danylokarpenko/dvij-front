@@ -1,0 +1,11 @@
+.textComponent {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.textComponentExpanded {
+  width: 100%;
+  white-space: initial;
+  word-wrap: break-word;
+}

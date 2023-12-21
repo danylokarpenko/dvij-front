@@ -86,14 +86,16 @@ export default function EditPartialEntityForm({
             >
               Exit
             </Button>
-            <Button
-              variant="text"
-              color="error"
-              disabled={isSubmitting}
-              onClick={handleDelete}
-            >
-              <DeleteForeverIcon />
-            </Button>
+            {deleteEntityAction && (
+              <Button
+                variant="text"
+                color="error"
+                disabled={isSubmitting}
+                onClick={handleDelete}
+              >
+                <DeleteForeverIcon />
+              </Button>
+            )}
           </Form>
         )}
       </Formik>

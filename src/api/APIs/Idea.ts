@@ -1,4 +1,4 @@
-import { IdeaI } from '../../store/ideas/interfaces/iteration.interface';
+import { IdeaI } from '../../store/ideas/interfaces/idea.interface';
 import axiosInstance from '../axiosConfig';
 
 export const getIdeas = async () => {
@@ -18,5 +18,10 @@ export const createIdea = async (idea: IdeaI) => {
 
 export const putIdea = async (idea: IdeaI) => {
   const response: IdeaI = await axiosInstance.put(`/ideas/${idea.id}`, idea);
+  return response;
+};
+
+export const deleteIdea = async (id: number) => {
+  const response: IdeaI = await axiosInstance.delete(`/ideas/${id}`);
   return response;
 };

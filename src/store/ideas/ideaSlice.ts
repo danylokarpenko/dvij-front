@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IdeaI } from './interfaces/iteration.interface';
+import { IdeaI } from './interfaces/idea.interface';
 
 interface IdeaState {
   current: IdeaI | null;
@@ -77,6 +77,12 @@ export const {
 
   createIdeaStart,
   createIdeaSuccess,
+
+  // updateIdeaStart,
+  // updateIdeasSuccess,
+
+  // deleteIdeaStart,
+  // deleteIdeasSuccess,
 } = ideaSlice.actions;
 const ideaReducer = ideaSlice.reducer;
 export default ideaReducer;

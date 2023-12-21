@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as Idea from '../../api/APIs/Idea';
 
 import { RootState } from '../store';
-import { IdeaI } from './interfaces/iteration.interface';
+import { IdeaI } from './interfaces/idea.interface';
 import {
   createIdeaStart,
   fetchIdeaStart,
@@ -89,3 +89,45 @@ export const createIdea = createAsyncThunk(
 );
 
 // Define other async actions like signup, refresh, logout
+
+export const updateIdea = createAsyncThunk(
+  'ideas/updateIdea',
+  async (
+    { payload: idea }: { payload: IdeaI },
+    { dispatch, rejectWithValue, getState }
+  ) => {
+    try {
+      const response = await Idea.putIdea({
+        ...idea,
+      });
+
+      const ideas = selectIdeas(getState() as RootState);
+      dispatch(
+        fetchIdeasSuccess(
+          ideas.map((i: IdeaI) => (i.id === response.id ? response : i))
+        )
+      );
+      return response;
+    } catch (error: any) {
+      dispatch(ideasFailure(error.message));
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const deleteIdea = createAsyncThunk(
+  'ideas/deleteIdea',
+  async (id: number, { dispatch, rejectWithValue, getState }) => {
+    try {
+      // dispatch(deleteIdeaStart());
+      const response = await Idea.deleteIdea(id);
+      const ideas = selectIdeas(getState() as RootState);
+      dispatch(fetchIdeasSuccess(ideas.filter((i: IdeaI) => i.id !== id)));
+      return response;
+      return response;
+    } catch (error: any) {
+      dispatch(ideasFailure(error.message));
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
