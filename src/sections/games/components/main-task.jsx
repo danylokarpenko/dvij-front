@@ -13,8 +13,7 @@ export default function MainTask({ game }) {
     setIsMainTaskFormModalOpen(true);
   };
 
-  const longPressEvent = (gameColumnNameToEdit) =>
-    useLongPress(() => onLongPress(gameColumnNameToEdit));
+  const longPressEvent = () => useLongPress(() => onLongPress());
 
   return (
     <div>
@@ -35,7 +34,7 @@ export default function MainTask({ game }) {
           padding: 5,
           cursor: 'pointer',
         }}
-        {...longPressEvent('mainTask')}
+        {...longPressEvent()}
       >
         {mainTask} <MainTaskSvg height={20} />
       </div>

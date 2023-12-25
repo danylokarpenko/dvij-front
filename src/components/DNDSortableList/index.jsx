@@ -45,12 +45,14 @@ function DNDSortableList({ items: _items, setItems, ItemComponent }) {
             {items.map((item, index) => (
               <Draggable key={item.id} draggableId={item.id} index={index}>
                 {(provided) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    {ItemComponent && <ItemComponent item={item} />}
+                  <div ref={provided.innerRef} {...provided.draggableProps}>
+                    {ItemComponent && (
+                      <ItemComponent
+                        draggableProps={provided.draggableProps}
+                        dragHandleProps={provided.dragHandleProps}
+                        item={item}
+                      />
+                    )}
                   </div>
                 )}
               </Draggable>

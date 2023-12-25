@@ -18,86 +18,91 @@ import EditPartialEntityForm from '../../../components/Forms/EditPartialEntityFo
 const defaultIconOptions = {
   style: { width: '25px', height: '25px', padding: 2, marginRight: 2 },
 };
+const IterationItem = React.forwardRef(
+  ({ item: iteration, dragHandleProps }, ref) => {
+    const [isExpanded, setIsExpanded] = React.useState(false);
+    const [isOpenEditEntityModal, setIsOpenEditEntityModal] =
+      React.useState(false);
+    const userId = Number(localStorage.getItem('userId'));
+    const handleExpand = () => {
+      setIsExpanded(!isExpanded);
+    };
+    const { description, likes, creator } = iteration;
+    const dispatch = useDispatch();
 
-export default function IterationItem({ item: iteration }) {
-  const [isExpanded, setIsExpanded] = React.useState(false);
-  const [isOpenEditEntityModal, setIsOpenEditEntityModal] =
-    React.useState(false);
-  const userId = Number(localStorage.getItem('userId'));
-  const handleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
-  const { description, likes, creator } = iteration;
-  const dispatch = useDispatch();
+    const onLongPress = () => {
+      setIsOpenEditEntityModal(true);
+    };
 
-  const onLongPress = () => {
-    setIsOpenEditEntityModal(true);
-  };
+    const longPressEvent = () => useLongPress(() => onLongPress());
 
-  const longPressEvent = () => useLongPress(() => onLongPress());
-
-  return (
-    <Stack
-      paddingTop={1}
-      paddingLeft={1}
-      paddingRight={1}
-      direction="row"
-      alignItems="center"
-      spacing={1}
-    >
-      <ResponsiveDialog
-        open={isOpenEditEntityModal}
-        setOpen={setIsOpenEditEntityModal}
+    return (
+      <Stack
+        paddingTop={1}
+        paddingLeft={1}
+        paddingRight={1}
+        direction="row"
+        alignItems="center"
+        spacing={1}
       >
-        <EditPartialEntityForm
-          entityColumnNameToEdit="description"
-          entity={iteration}
-          callback={() => setIsOpenEditEntityModal(null)}
-          updateEntityAction={updateIteration}
-          deleteEntityAction={deleteIteration}
-        />
-      </ResponsiveDialog>
-      <Box
-        component="img"
-        alt={name}
-        src={creator.avatarUrl}
-        sx={{ width: 20, height: 20, borderRadius: 1.5, flexShrink: 0 }}
-      />
-
-      <Box
-        sx={{ minWidth: 100, flexGrow: 0, width: '100%' }}
-        {...longPressEvent('description')}
-      >
-        <div
-          id="textbox"
-          style={{ cursor: 'pointer' }}
-          className={
-            isExpanded ? styles.textComponentExpanded : styles.textComponent
-          }
-          onClick={handleExpand}
+        <ResponsiveDialog
+          open={isOpenEditEntityModal}
+          setOpen={setIsOpenEditEntityModal}
         >
-          {description}
+          <EditPartialEntityForm
+            entityColumnNameToEdit="description"
+            entity={iteration}
+            callback={() => setIsOpenEditEntityModal(null)}
+            updateEntityAction={updateIteration}
+            deleteEntityAction={deleteIteration}
+          />
+        </ResponsiveDialog>
+        <div ref={ref} {...dragHandleProps}>
+          <Box
+            component="img"
+            alt={name}
+            src={creator.avatarUrl}
+            sx={{ width: 20, height: 20, borderRadius: 1.5, flexShrink: 0 }}
+          />
         </div>
-      </Box>
 
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'end',
-        }}
-      >
-        <img
-          {...defaultIconOptions}
-          src={likes.some((ui) => ui === userId) ? HeartActivePng : HeartPng}
-          alt={'heart'}
-          onClick={() => dispatch(likeIteration(iteration))}
-        />
-        {likes.length}
-      </div>
-    </Stack>
-  );
-}
+        <Box
+          sx={{ minWidth: 100, flexGrow: 0, width: '100%' }}
+          {...longPressEvent('description')}
+        >
+          <div
+            id="textbox"
+            style={{ cursor: 'pointer' }}
+            className={
+              isExpanded ? styles.textComponentExpanded : styles.textComponent
+            }
+            onClick={handleExpand}
+          >
+            {description}
+          </div>
+        </Box>
+
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'end',
+          }}
+        >
+          <img
+            {...defaultIconOptions}
+            src={likes.some((ui) => ui === userId) ? HeartActivePng : HeartPng}
+            alt={'heart'}
+            onClick={() => dispatch(likeIteration(iteration))}
+          />
+          {likes.length}
+        </div>
+      </Stack>
+    );
+  }
+);
+
+IterationItem.displayName = 'DraggableIterationItem';
 
 IterationItem.propTypes = {
   item: PropTypes.shape({
@@ -109,4 +114,9 @@ IterationItem.propTypes = {
       avatarUrl: PropTypes.string.isRequired,
     }).isRequired,
   }),
+  ref: PropTypes.func,
+  draggableProps: PropTypes.object,
+  dragHandleProps: PropTypes.object,
 };
+
+export default IterationItem;

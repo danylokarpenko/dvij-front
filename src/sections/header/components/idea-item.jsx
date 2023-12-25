@@ -61,19 +61,6 @@ export default function IdeaItem({ idea }) {
         sx={{ width: 20, height: 20, borderRadius: 1.5, flexShrink: 0 }}
       />
 
-      {/* <Box
-        sx={{ minWidth: 100, flexGrow: 0, cursor: 'pointer' }}
-        {...longPressEvent('iStoreLink')}
-      >
-        <Typography
-          fontSize={14}
-          sx={{ color: 'text.primary', flexGrow: 0 }}
-          noWrap
-        >
-          {description}
-        </Typography>
-      </Box> */}
-
       <Box
         sx={{ minWidth: 100, flexGrow: 0, width: '100%', cursor: 'pointer' }}
         {...longPressEvent()}

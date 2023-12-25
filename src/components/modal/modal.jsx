@@ -17,9 +17,23 @@ export default function ResponsiveDialog({
 }) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
+  const [canClose, setCanClose] = React.useState(false);
+
+  React.useEffect(() => {
+    if (open) {
+      setCanClose(false); // Disable closing when dialog opens
+      const timer = setTimeout(() => {
+        setCanClose(true); // Enable closing after 1 second
+      }, 600);
+
+      return () => clearTimeout(timer);
+    }
+  }, [open]);
 
   const handleClose = () => {
-    setOpen(false);
+    if (canClose) {
+      setOpen(false);
+    }
   };
 
   return (
@@ -39,7 +53,7 @@ export default function ResponsiveDialog({
             </Typography>
           </DialogTitle>
         )}
-        <DialogContent>
+        <DialogContent style={canClose ? {} : { pointerEvents: 'none' }}>
           <DialogContentText>{children}</DialogContentText>
         </DialogContent>
       </Dialog>
