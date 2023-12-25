@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
 import Divider from '@mui/material/Divider';
@@ -22,7 +21,7 @@ export default function GamesView({ isHitPage = false }) {
   return (
     <AppThemeProvider>
       <Grid xs={12} md={6} lg={8}>
-        <Card>
+        <div>
           <Scrollbar>
             <Stack spacing={3} sx={{ p: 0, pr: 0 }}>
               {games.map((game) => (
@@ -31,7 +30,7 @@ export default function GamesView({ isHitPage = false }) {
             </Stack>
           </Scrollbar>
           <Divider sx={{ borderStyle: 'dashed' }} />
-        </Card>
+        </div>
       </Grid>
     </AppThemeProvider>
   );

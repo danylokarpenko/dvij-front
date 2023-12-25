@@ -31,3 +31,11 @@ export const putIteration = async (iteration: IterationI) => {
   );
   return response;
 };
+
+export const bulkUpdateIterations = async (body: { payload: IterationI[] }) => {
+  const response: IterationI[] = await axiosInstance.put(
+    `/iterations/bulk-update`,
+    body
+  );
+  return response;
+};

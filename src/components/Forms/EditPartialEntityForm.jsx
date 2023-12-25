@@ -51,7 +51,7 @@ export default function EditPartialEntityForm({
       ...form,
     };
 
-    dispatch(deleteEntityAction(payload.id));
+    dispatch(deleteEntityAction(Number(payload.id)));
     callback();
   };
 

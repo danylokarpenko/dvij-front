@@ -20,13 +20,13 @@ const renderColumn = (c) => (
   />
 );
 
-export default function IterationForm({ iteration, callback }) {
+export default function IterationForm({ item, callback }) {
   const dispatch = useDispatch();
   useEffect(() => {
-    if (iteration.id) dispatch(fetchIteration(iteration.id));
+    if (item?.id) dispatch(fetchIteration(item.id));
   }, [dispatch]);
 
-  if (!iteration) {
+  if (!item) {
     return null;
   }
 
@@ -45,7 +45,7 @@ export default function IterationForm({ iteration, callback }) {
     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
       <Formik
         initialValues={{
-          ...iteration,
+          ...item,
           description: '',
           likes: [],
           isApproved: false,
@@ -81,8 +81,9 @@ export default function IterationForm({ iteration, callback }) {
 }
 
 IterationForm.propTypes = {
-  iteration: PropTypes.shape({
+  item: PropTypes.shape({
     id: PropTypes.number.isRequired,
+    index: PropTypes.number.isRequired,
     gameId: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
   }),

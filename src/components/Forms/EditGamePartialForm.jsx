@@ -27,7 +27,6 @@ export default function EditGamePartialForm({
   game,
   callback,
 }) {
-  console.log('gameColumnNameToEdit', gameColumnNameToEdit);
   const dispatch = useDispatch();
 
   const handleSubmit = (form) => {

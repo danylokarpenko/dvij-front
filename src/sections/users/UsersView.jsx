@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 
@@ -23,7 +22,7 @@ export default function UsersView() {
   return (
     <AppThemeProvider>
       <Grid xs={12} md={6} lg={8}>
-        <Card>
+        <div>
           <Scrollbar>
             <Stack spacing={3} sx={{ p: 0, pr: 0 }}>
               {[...users]
@@ -38,7 +37,7 @@ export default function UsersView() {
             </Stack>
           </Scrollbar>
           <Divider sx={{ borderStyle: 'dashed' }} />
-        </Card>
+        </div>
       </Grid>
     </AppThemeProvider>
   );

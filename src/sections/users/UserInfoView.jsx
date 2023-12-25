@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-import Card from '@mui/material/Card';
 import PropTypes from 'prop-types';
 import { Box, Grid, Slider, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,7 +29,7 @@ export default function UserInfoView() {
   return (
     <AppThemeProvider>
       <Grid xs={12} md={6} lg={8}>
-        <Card>
+        <div>
           <Grid style={{ display: 'flex' }}>
             <Box
               style={{ margin: '10px 10px 0 10px' }}
@@ -101,7 +100,7 @@ export default function UserInfoView() {
                 </Typography>
               ))}
           </Grid>
-        </Card>
+        </div>
       </Grid>
     </AppThemeProvider>
   );

@@ -24,10 +24,11 @@ import IterationForm from '../../components/Forms/IterationForm';
 import AddGameUserForm from '../../components/Forms/AddGameUserForm';
 import IconLinks from './components/icon-links';
 import MainTask from './components/main-task';
-
-const sortByLikes = (array) => {
-  return [...array].sort((a, b) => b.likes - a.likes);
-};
+import DNDSortableList from '../../components/DNDSortableList';
+import {
+  bulkUpdateIterations,
+  updateIteration,
+} from '../../store/iteration/iterationActions';
 
 export default function GameInfoView() {
   const { id } = useParams();
@@ -36,14 +37,30 @@ export default function GameInfoView() {
   const dispatch = useDispatch();
   const [iterationModalOpen, setOpenIterationModal] = React.useState(false);
   const [addUserToGameModalOpen, setAddUserToGameModal] = React.useState(false);
+  const [iterations, setIterations] = React.useState();
 
   useEffect(() => {
     dispatch(fetchGame(id));
   }, [dispatch]);
 
+  useEffect(() => {
+    if (game?.iterations) {
+      setIterations(game.iterations);
+    }
+  }, [dispatch, game?.iterations]);
+
   if (!game) {
     return null;
   }
+
+  const handleUpdateIteration = (sortedItems) => {
+    setIterations(sortedItems);
+    dispatch(
+      bulkUpdateIterations({
+        payload: [...sortedItems],
+      })
+    );
+  };
 
   return (
     <AppThemeProvider>
@@ -53,7 +70,11 @@ export default function GameInfoView() {
           setOpen={setOpenIterationModal}
         >
           <IterationForm
-            iteration={{ gameId: game?.id, creatorId: user?.id }}
+            item={{
+              gameId: game?.id,
+              creatorId: user?.id,
+              index: game.iterations.length,
+            }}
             callback={() => setOpenIterationModal(false)}
           />
         </ResponsiveDialog>
@@ -80,22 +101,20 @@ export default function GameInfoView() {
             <GameChart game={game} />
           </div>
           <IconLinks game={game} />
-          <Grid>
-            <Scrollbar>
-              <Stack spacing={1} sx={{ p: 0, pr: 0 }}>
-                {sortByLikes(game.iterations).map((iteration) => (
-                  <IterationItem key={iteration.id} iteration={iteration} />
-                ))}
-              </Stack>
-              <Button
-                onClick={() => {
-                  setOpenIterationModal(true);
-                }}
-              >
-                <SportsKabaddiIcon />
-              </Button>
-            </Scrollbar>
-          </Grid>
+          {iterations && (
+            <DNDSortableList
+              items={iterations}
+              setItems={handleUpdateIteration}
+              ItemComponent={IterationItem}
+            />
+          )}
+          <Button
+            onClick={() => {
+              setOpenIterationModal(true);
+            }}
+          >
+            <SportsKabaddiIcon />
+          </Button>
         </Grid>
       </Grid>
     </AppThemeProvider>

@@ -50,16 +50,19 @@ export const deleteIteration = createAsyncThunk(
   'iterations/deleteIteration',
   async (id: number, { dispatch, rejectWithValue, getState }) => {
     try {
-      // dispatch(deleteIterationStart());
+      dispatch(updateIterationStart());
       const response = await Iteration.deleteIteration(id);
       const game = selectGame(getState() as RootState);
+      const filteredIterations = game.iterations.filter(
+        (i: IterationI) => i.id !== id
+      );
+
       dispatch(
         fetchGameSuccess({
           ...game,
-          iterations: game.iterations.filter((i: IterationI) => i.id !== id),
+          iterations: filteredIterations,
         })
       );
-      return response;
       return response;
     } catch (error: any) {
       dispatch(iterationsFailure(error.message));
@@ -118,6 +121,33 @@ export const updateIteration = createAsyncThunk(
           iterations: game.iterations.map((i: IterationI) =>
             i.id === response.id ? response : i
           ),
+        })
+      );
+      return response;
+    } catch (error: any) {
+      dispatch(iterationsFailure(error.message));
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const bulkUpdateIterations = createAsyncThunk(
+  'iterations/bulkUpdateIterations',
+  async (
+    { payload: sortedItems }: { payload: IterationI[] },
+    { dispatch, rejectWithValue, getState }
+  ) => {
+    try {
+      dispatch(updateIterationStart());
+      const response = await Iteration.bulkUpdateIterations({
+        payload: sortedItems,
+      });
+
+      const game = selectGame(getState() as RootState);
+      dispatch(
+        fetchGameSuccess({
+          ...game,
+          iterations: sortedItems,
         })
       );
       return response;

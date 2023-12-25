@@ -19,11 +19,11 @@ const defaultIconOptions = {
   style: { width: '25px', height: '25px', padding: 2, marginRight: 2 },
 };
 
-export default function IterationItem({ iteration }) {
+export default function IterationItem({ item: iteration }) {
   const [isExpanded, setIsExpanded] = React.useState(false);
   const [isOpenEditEntityModal, setIsOpenEditEntityModal] =
     React.useState(false);
-
+  const userId = Number(localStorage.getItem('userId'));
   const handleExpand = () => {
     setIsExpanded(!isExpanded);
   };
@@ -64,7 +64,10 @@ export default function IterationItem({ iteration }) {
         sx={{ width: 20, height: 20, borderRadius: 1.5, flexShrink: 0 }}
       />
 
-      <Box sx={{ minWidth: 100, flexGrow: 0, width: '100%' }}>
+      <Box
+        sx={{ minWidth: 100, flexGrow: 0, width: '100%' }}
+        {...longPressEvent('description')}
+      >
         <div
           id="textbox"
           style={{ cursor: 'pointer' }}
@@ -72,7 +75,6 @@ export default function IterationItem({ iteration }) {
             isExpanded ? styles.textComponentExpanded : styles.textComponent
           }
           onClick={handleExpand}
-          {...longPressEvent('description')}
         >
           {description}
         </div>
@@ -87,7 +89,7 @@ export default function IterationItem({ iteration }) {
       >
         <img
           {...defaultIconOptions}
-          src={likes > 0 ? HeartActivePng : HeartPng}
+          src={likes.some((ui) => ui === userId) ? HeartActivePng : HeartPng}
           alt={'heart'}
           onClick={() => dispatch(likeIteration(iteration))}
         />
@@ -98,7 +100,7 @@ export default function IterationItem({ iteration }) {
 }
 
 IterationItem.propTypes = {
-  iteration: PropTypes.shape({
+  item: PropTypes.shape({
     id: PropTypes.number.isRequired,
     likes: PropTypes.array.isRequired,
     description: PropTypes.string.isRequired,
