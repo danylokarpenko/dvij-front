@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 
-import Card from '@mui/material/Card';
 import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi';
 import PropTypes from 'prop-types';
-import { Button, Grid, Stack } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -13,7 +12,6 @@ import AppThemeProvider from '../../theme/AppThemeProvider';
 
 import GamesItem from './components/game-item';
 import GameChart from './components/game-chart';
-import Scrollbar from '../../components/scrollbar';
 import IterationItem from './components/iteration-item';
 import ResponsiveDialog from '../../components/modal/modal';
 
@@ -25,10 +23,7 @@ import AddGameUserForm from '../../components/Forms/AddGameUserForm';
 import IconLinks from './components/icon-links';
 import MainTask from './components/main-task';
 import DNDSortableList from '../../components/DNDSortableList';
-import {
-  bulkUpdateIterations,
-  updateIteration,
-} from '../../store/iteration/iterationActions';
+import { bulkUpdateIterations } from '../../store/iteration/iterationActions';
 
 export default function GameInfoView() {
   const { id } = useParams();

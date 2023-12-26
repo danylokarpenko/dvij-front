@@ -33,7 +33,7 @@ export default function GamesItem({ game, setAddUserToGameModal }) {
       onClick={() => {
         if (isListView) navigate(`${window.location.pathname}/${game.id}`);
       }}
-      style={{ height: '70px' }}
+      style={{ height: '70px', cursor: isListView ? 'pointer' : 'default' }}
     >
       <Box
         component="img"

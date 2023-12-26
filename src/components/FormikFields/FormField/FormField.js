@@ -1,7 +1,7 @@
 import React from 'react';
 import { ErrorMessage, Field } from 'formik';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+
 import { TextField } from 'formik-material-ui';
 
 const FormField = ({
@@ -9,7 +9,7 @@ const FormField = ({
   name,
   label,
   type,
-  customClassName,
+
   ...restProps
 }) => (
   <div key={name}>

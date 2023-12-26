@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEffect, useReducer, useState, useMemo } from 'react';
 import optionsFetchReducer from '../useOptionsFetchHook/optionsFetchReducer';
 import {

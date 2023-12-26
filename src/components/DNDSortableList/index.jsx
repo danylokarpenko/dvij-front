@@ -1,7 +1,6 @@
 import React from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import PropTypes from 'prop-types';
-import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 
 // fake data generator
 const getItems = (items) =>
