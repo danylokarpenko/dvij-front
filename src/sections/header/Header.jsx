@@ -8,19 +8,27 @@ import ResponsiveDialog from '../../components/modal/modal';
 import IdeaForm from '../../components/Forms/IdeaForm';
 import { fetchIdeas } from '../../store/ideas/ideaActions';
 import IdeaItems from './components/idea-items';
+import { useLocation } from 'react-router-dom';
 
-const Header = () => {
+export default function Header() {
+  const dispatch = useDispatch();
   const [ideasModalOpen, setOpenIdeasModal] = React.useState(false);
   const [ideaFormModalOpen, setIdeaFormModalOpen] = React.useState(false);
-  const dispatch = useDispatch();
+  const userId = Number(localStorage.getItem('userId'));
+  const location = useLocation();
+  const isLogin = location.pathname === '/login';
+  console.log(location.pathname);
 
   useEffect(() => {
+    if (isLogin) return;
     dispatch(fetchIdeas());
-  }, []);
+  }, [isLogin]);
+
+  if (isLogin) return null;
+
   const openIdeasModal = () => {
     setOpenIdeasModal(true);
   };
-  const userId = Number(localStorage.getItem('userId'));
 
   return (
     <header
@@ -49,7 +57,6 @@ const Header = () => {
           />
         </ResponsiveDialog>
       </ResponsiveDialog>
-
       <div style={{ flex: 1 }}></div>
       <FGTextSvg width={100} height={100} />
       <div style={{ flex: 1, display: 'flex', justifyContent: 'end' }}>
@@ -62,6 +69,4 @@ const Header = () => {
       </div>
     </header>
   );
-};
-
-export default Header;
+}

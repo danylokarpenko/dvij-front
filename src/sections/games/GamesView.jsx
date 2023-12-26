@@ -22,14 +22,11 @@ export default function GamesView({ isHitPage = false }) {
     <AppThemeProvider>
       <Grid xs={12} md={6} lg={8}>
         <div>
-          <Scrollbar>
-            <Stack spacing={3} sx={{ p: 0, pr: 0 }}>
-              {games.map((game) => (
-                <GamesItem key={game.id} game={game} />
-              ))}
-            </Stack>
-          </Scrollbar>
-          <Divider sx={{ borderStyle: 'dashed' }} />
+          <Stack spacing={3} sx={{ p: 0, pr: 0 }}>
+            {games.map((game) => (
+              <GamesItem key={game.id} game={game} />
+            ))}
+          </Stack>
         </div>
       </Grid>
     </AppThemeProvider>

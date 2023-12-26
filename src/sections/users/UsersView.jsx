@@ -23,20 +23,17 @@ export default function UsersView() {
     <AppThemeProvider>
       <Grid xs={12} md={6} lg={8}>
         <div>
-          <Scrollbar>
-            <Stack spacing={3} sx={{ p: 0, pr: 0 }}>
-              {[...users]
-                .sort((u1, u2) => {
-                  if (u1.id === Number(logginedUserId)) return -1;
-                  if (u2.id === Number(logginedUserId)) return 1;
-                  return 0;
-                })
-                .map((user) => (
-                  <UsersItem key={user.id} user={user} />
-                ))}
-            </Stack>
-          </Scrollbar>
-          <Divider sx={{ borderStyle: 'dashed' }} />
+          <Stack spacing={3} sx={{ p: 0, pr: 0 }}>
+            {[...users]
+              .sort((u1, u2) => {
+                if (u1.id === Number(logginedUserId)) return -1;
+                if (u2.id === Number(logginedUserId)) return 1;
+                return 0;
+              })
+              .map((user) => (
+                <UsersItem key={user.id} user={user} />
+              ))}
+          </Stack>
         </div>
       </Grid>
     </AppThemeProvider>
