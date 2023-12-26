@@ -35,6 +35,8 @@ const IterationItem = React.forwardRef(
     };
 
     const longPressEvent = () => useLongPress(() => onLongPress());
+    const userRole = localStorage.getItem('userRole');
+    const isEditRule = userRole === 'admin' || userRole === 'owner';
 
     return (
       <Stack
@@ -57,7 +59,7 @@ const IterationItem = React.forwardRef(
             deleteEntityAction={deleteIteration}
           />
         </ResponsiveDialog>
-        <div ref={ref} {...dragHandleProps}>
+        <div ref={ref} {...(isEditRule ? dragHandleProps : {})}>
           <Box
             component="img"
             alt={name}

@@ -48,7 +48,14 @@ export default function LoginComponent() {
       password: data.get('password') as string,
     };
 
-    dispatch(login({ loginData: payload, callback: () => navigate('/games') }));
+    dispatch(
+      login({
+        loginData: payload,
+        callback: () => {
+          navigate('/games');
+        },
+      })
+    );
   };
 
   return (

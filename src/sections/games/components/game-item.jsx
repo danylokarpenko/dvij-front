@@ -20,10 +20,13 @@ const sortByIsLead = (array) => {
 export default function GamesItem({ game, setAddUserToGameModal }) {
   const { name, publisherName, iconUrl, mainTask, gameUsers } = game;
   const navigate = useNavigate();
-
   const isListView =
     window.location.pathname === '/games' ||
     window.location.pathname === '/hits';
+
+  const userRole = localStorage.getItem('userRole');
+  const isAdmin = userRole === 'admin';
+  const isOwner = userRole === 'owner';
 
   return (
     <Stack
@@ -83,7 +86,7 @@ export default function GamesItem({ game, setAddUserToGameModal }) {
           <PeopleItem key={i} gameUser={gameUser} />
         ))}
       </div>
-      {!isListView && (
+      {!isListView && (isAdmin || isOwner) && (
         <div
           style={{
             display: 'flex',

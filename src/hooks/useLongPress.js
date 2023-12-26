@@ -8,9 +8,14 @@ const useLongPress = (
   const [longPressTriggered, setLongPressTriggered] = useState(false);
   const timeout = useRef();
   const target = useRef();
+  const userRole = localStorage.getItem('userRole');
+  const isEditRule = userRole === 'admin' || userRole === 'owner';
 
   const start = useCallback(
     (event) => {
+      if (!isEditRule) {
+        return;
+      }
       if (shouldPreventDefault && event.target) {
         event.preventDefault();
       }
