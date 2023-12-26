@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
 export default function PeopleItem({ user }) {
-  const { id, avatarUrl, firstName, lastName } = user;
+  const { id, avatarUrl, firstName, lastName, role, jobTitle } = user;
   const navigate = useNavigate();
   return (
     <Stack
@@ -23,12 +23,19 @@ export default function PeopleItem({ user }) {
           height: 50,
           borderRadius: 1,
           flexShrink: 0,
-          // border: isLead ? '2px solid #FFC700' : 'none',
         }}
       />
-      <Typography>
-        {firstName} {lastName}
-      </Typography>
+      <Stack spacing={0} sx={{ p: 0, pr: 0 }}>
+        <Typography fontSize={14} sx={{ color: 'text.primary', flexGrow: 0 }}>
+          {firstName} {lastName}
+        </Typography>
+        <Typography fontSize={10} sx={{ color: 'text.secondary', flexGrow: 0 }}>
+          {role}
+        </Typography>
+        <Typography fontSize={10} sx={{ color: 'text.secondary', flexGrow: 0 }}>
+          {jobTitle}
+        </Typography>
+      </Stack>
     </Stack>
   );
 }
@@ -39,5 +46,7 @@ PeopleItem.propTypes = {
     avatarUrl: PropTypes.string.isRequired,
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+    jobTitle: PropTypes.string.isRequired,
   }),
 };
