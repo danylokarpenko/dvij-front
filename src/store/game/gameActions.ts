@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'sonner';
 
 import * as Games from '../../api/APIs/Game';
 import {
@@ -7,6 +8,7 @@ import {
   fetchGamesFailure,
   fetchGamesStart,
   fetchGamesSuccess,
+  createGameStart,
 } from './gameSlice';
 import { RootState } from '../store';
 import { selectGame } from './gameSelectors';
@@ -90,4 +92,29 @@ export const updateGame = createAsyncThunk(
   }
 );
 
+export const createGame = createAsyncThunk(
+  'games/createGame',
+  async (
+    { payload, callback }: { payload: GameI; callback: () => void },
+    { dispatch, rejectWithValue }
+  ) => {
+    try {
+      dispatch(createGameStart());
+      const game = await Games.createGame(payload);
+      dispatch(
+        fetchGameSuccess({
+          ...game,
+        })
+      );
+      callback();
+      return game;
+    } catch (error: any) {
+      console.log(error.response.data.message.message);
+
+      toast.error(error.response.data.message.message);
+      dispatch(fetchGamesFailure(error.message));
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 // Define other async actions like signup, refresh, logout

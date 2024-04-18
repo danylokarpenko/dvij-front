@@ -11,7 +11,7 @@ const FormField = ({
   type,
 
   ...restProps
-}) => (
+}: any) => (
   <div key={name}>
     {type !== 'text' && <label>{label}</label>}
     <Field

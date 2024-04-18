@@ -26,4 +26,9 @@ export const updateGame = async (payload: any) => {
   return response;
 };
 
+export const createGame = async (payload: any) => {
+  const response: GameI = await axiosInstance.post(`/games`, payload);
+  return response;
+};
+
 // Add other API functions as needed

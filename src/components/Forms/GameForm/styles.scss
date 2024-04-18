@@ -1,0 +1,222 @@
+.base-settings-fields-container {
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-start;
+  gap: 7px;
+
+  flex-wrap: wrap;
+
+  .inline-field {
+    justify-content: flex-start !important;
+  }
+
+  .form-group {
+    min-width: 12rem;
+  }
+
+  .note-field {
+    min-width: calc(24rem + 20px);
+  }
+
+  .is-active-switch {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 0 7px;
+  }
+
+  @media (max-width: 700px) {
+    .note-field,
+    .form-group {
+      min-width: 15rem;
+    }
+  }
+}
+
+.registration-fields-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  gap: 7px;
+
+  flex-wrap: wrap;
+  border-top: 2px solid rgba(0, 0, 0, 0.025);
+
+  padding: 1.5rem 0;
+
+  .inline-field {
+    justify-content: flex-start !important;
+  }
+
+  .form-group {
+    min-width: 8rem;
+  }
+
+  .note-field {
+    min-width: calc(24rem + 20px);
+  }
+
+  .is-active-switch {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 0 7px;
+  }
+
+  @media (max-width: 700px) {
+    .note-field,
+    .form-group {
+      min-width: 15rem;
+    }
+  }
+}
+
+.registration-fields {
+  display: flex;
+  gap: 1rem;
+
+  flex-wrap: wrap;
+
+  .registration-date {
+    width: 250 px;
+  }
+}
+
+.prepaid-fields-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  gap: 7px;
+
+  flex-wrap: wrap;
+
+  border-bottom: 2px solid rgba(0, 0, 0, 0.025);
+  border-top: 2px solid rgba(0, 0, 0, 0.025);
+
+  padding: 1.5rem 0;
+
+  .prepaid-fields-form-container {
+    display: flex;
+    flex-direction: row;
+
+    gap: 20px;
+
+    .prepaid-button {
+      min-width: 60px;
+      height: 40px;
+    }
+  }
+
+  .inline-field {
+    justify-content: flex-start !important;
+  }
+
+  .form-group {
+    min-width: 8rem;
+  }
+
+  .note-field {
+    min-width: calc(24rem + 20px);
+  }
+
+  .is-active-switch {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 0 7px;
+  }
+
+  @media (max-width: 700px) {
+    .note-field,
+    .form-group {
+      min-width: 15rem;
+    }
+  }
+}
+
+.game-form {
+  width: 60vw !important;
+}
+
+.postBack-form-base {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.059);
+
+  margin-top: 15px;
+
+  flex-wrap: wrap;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.postBack-form-main-settings {
+  flex: 1 1 150px;
+
+  .form-group {
+    max-width: 185px;
+    width: 100%;
+    min-width: 120px;
+  }
+}
+
+.postBack-form-parameters {
+  flex: 1 1 150px;
+  .form-group {
+    max-width: 130px;
+  }
+}
+
+.postBack-enums {
+  .form-group {
+    max-width: 185px;
+    width: 100%;
+    min-width: 120px;
+  }
+}
+.postBack-form-generates {
+  flex-direction: column;
+  gap: 0;
+
+  .postBack-form-base {
+    border-top: 0px solid rgba(0, 0, 0, 0.059);
+  }
+
+  .postBack-form-generates-button {
+    margin-top: 15px;
+    max-width: 150px;
+    min-width: 100px;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+}
+
+.postBack-external-id {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  .form-group {
+    text-align: left;
+    max-width: 220px;
+    width: 100%;
+    min-width: 120px;
+  }
+  .inline-field {
+    max-width: 160px;
+  }
+}

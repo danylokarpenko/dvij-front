@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
+  > div {
+    margin-top: 15px;
+    width: -webkit-fill-available;
+  }
+}
+
+.btn {
+  width: max-content;
+}

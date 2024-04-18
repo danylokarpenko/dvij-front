@@ -1,11 +1,11 @@
-import React, { ReactNode } from 'react';
-import { FC } from 'react';
+import React, { ReactNode, FC } from 'react';
+import { Provider } from 'react-redux';
+import { Toaster } from 'sonner';
+import { Grid } from '@mui/material';
 
 import Header from './sections/header/Header';
-import { Provider } from 'react-redux';
 import store from './store/store';
 import StickyFooter from './components/Footer/StickyFooter';
-import { Grid } from '@mui/material';
 import { sizes } from './style/constants';
 
 interface AppProps {
@@ -26,6 +26,7 @@ const App: FC<AppProps> = ({ children }) => (
         {children}
       </Grid>
       <StickyFooter />
+      <Toaster theme="dark" position="bottom-right" duration={1500} />
     </Provider>
   </div>
 );

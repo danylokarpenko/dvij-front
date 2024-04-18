@@ -28,6 +28,15 @@ const gameSlice = createSlice({
       state.error = null;
     },
 
+    createGameStart(state) {
+      state.isLoading = true;
+    },
+    createGameSuccess(state, action: PayloadAction<GameI>) {
+      state.list = [...state.list, action.payload];
+      state.isLoading = false;
+      state.error = null;
+    },
+
     fetchGameStart(state) {
       state.isLoading = true;
     },
@@ -51,6 +60,8 @@ export const {
   fetchGamesFailure,
   fetchGameStart,
   fetchGameSuccess,
+  createGameStart,
+  createGameSuccess,
 } = gameSlice.actions;
 const gameReducer = gameSlice.reducer;
 export default gameReducer;
