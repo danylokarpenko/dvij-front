@@ -46,8 +46,6 @@ const SelectFormField = ({
       return isMulti ? [] : '';
     }
   };
-  console.log(selectedOption || getValue() || defaultOption);
-  console.log(field.name);
   return (
     <Select
       cx={{

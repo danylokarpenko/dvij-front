@@ -1,7 +1,6 @@
 import React from 'react';
 import { ErrorMessage, Field } from 'formik';
 import PropTypes from 'prop-types';
-
 import { TextField } from 'formik-material-ui';
 
 const FormField = ({
@@ -13,18 +12,23 @@ const FormField = ({
   ...restProps
 }: any) => (
   <div key={name}>
-    {type !== 'text' && <label>{label}</label>}
+    {type !== 'text' && type !== 'number' && <label>{label}</label>}
     <Field
       id={name}
       key={name}
       name={name}
       label={label}
+      variant="outlined"
+      InputLabelProps={{
+        shrink: true,
+      }}
       {...(component && { component })}
       {...(type && { type })}
-      {...(!component && type === 'text' && { component: TextField })}
+      {...(!component &&
+        (type === 'text' || type === 'number') && { component: TextField })}
       {...restProps}
     />
-    <ErrorMessage name={name} />
+    {/* <ErrorMessage name={name} /> */}
   </div>
 );
 

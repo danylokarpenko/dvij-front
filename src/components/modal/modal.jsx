@@ -54,7 +54,7 @@ export default function ResponsiveDialog({
           </DialogTitle>
         )}
         <DialogContent style={canClose ? {} : { pointerEvents: 'none' }}>
-          <DialogContentText>{children}</DialogContentText>
+          {children}
         </DialogContent>
       </Dialog>
     </React.Fragment>

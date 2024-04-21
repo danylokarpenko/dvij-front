@@ -7,6 +7,7 @@ import Header from './sections/header/Header';
 import store from './store/store';
 import StickyFooter from './components/Footer/StickyFooter';
 import { sizes } from './style/constants';
+import './styles.scss';
 
 interface AppProps {
   children?: ReactNode;

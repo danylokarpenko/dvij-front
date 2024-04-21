@@ -109,8 +109,6 @@ export const createGame = createAsyncThunk(
       callback();
       return game;
     } catch (error: any) {
-      console.log(error.response.data.message.message);
-
       toast.error(error.response.data.message.message);
       dispatch(fetchGamesFailure(error.message));
       return rejectWithValue(error.response.data);

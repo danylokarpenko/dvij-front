@@ -17,7 +17,6 @@ export default function Header() {
   const userId = Number(localStorage.getItem('userId'));
   const location = useLocation();
   const isLogin = location.pathname === '/login';
-  console.log(location.pathname);
 
   useEffect(() => {
     if (isLogin) return;
